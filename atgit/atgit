@@ -4,12 +4,12 @@ function atgit() {
     if [[ "$GIT_ROOT" == "" ]]; then
         "$@"
     else
-        local CURR_DIR=$PWD
         local OLDPWD_BCK=$OLDPWD
 
-        cd "$GIT_ROOT" && "$@"
+        pushd "$GIT_ROOT" 1> /dev/null && \
+        "$@" && \
+        popd 1> /dev/null
 
-        cd "$CURR_DIR"
         OLDPWD=$OLDPWD_BCK
     fi
 }
